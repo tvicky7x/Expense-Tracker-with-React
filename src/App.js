@@ -1,15 +1,13 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import BodyContainer from "./Component/BodyContainer";
 import Header from "./Component/Header";
-import ExpenseCard from "./Component/ExpenseCard";
 
 function App() {
   return (
-    <div>
+    <div className="bodyBackground">
       <Header></Header>
-      <BodyContainer>
-        <ExpenseCard></ExpenseCard>
-      </BodyContainer>
+      <BodyContainer></BodyContainer>
     </div>
   );
 }

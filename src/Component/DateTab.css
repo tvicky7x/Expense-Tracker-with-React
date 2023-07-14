@@ -1,0 +1,9 @@
+.min-size {
+  min-width: 80px;
+}
+
+.neg-margin {
+  margin-top: -5px;
+  margin-bottom: -2px;
+  font-size: small;
+}
