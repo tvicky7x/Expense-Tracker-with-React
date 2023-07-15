@@ -1,12 +1,7 @@
 import "./BodyContainer.css";
-import ExpenseCard from "./ExpenseCard";
 
-function BodyContainer() {
-  return (
-    <div className="container text-center size">
-      <ExpenseCard></ExpenseCard>
-    </div>
-  );
+function BodyContainer(props) {
+  return <div className="container text-center size">{props.children}</div>;
 }
 
 export default BodyContainer;
