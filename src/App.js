@@ -18,12 +18,70 @@ function App() {
     });
     setList(newList);
   }
+  function addExpense(e) {
+    e.preventDefault();
+    let expenseName = document.getElementById("expenseName").value;
+    let expenseAmount = document.getElementById("expenseAmount").value;
+    let expenseDate = document.getElementById("expenseDate").value;
+    console.log(expenseName, expenseAmount, expenseDate);
+  }
   return (
     <div>
       <Header title="Expense Tracker">
         <i className="bi bi-clipboard2-data"></i>
       </Header>
       <BodyContainer>
+        <Card className="mt-3">
+          <CardHeader title="Add Expense">
+            <i class="bi bi-pencil-square"></i>
+          </CardHeader>
+          <CardBody className="text-start">
+            <form action="#" onSubmit={addExpense}>
+              <div>
+                <label htmlFor="expenseName" className="form-label">
+                  Expense Name
+                </label>
+                <input
+                  type="text"
+                  name="expenseName"
+                  id="expenseName"
+                  className="form-control"
+                />
+              </div>
+              <div>
+                <label htmlFor="expenseAmount" className="form-label">
+                  Expense Amount
+                </label>
+                <input
+                  type="number"
+                  name="expenseAmount"
+                  id="expenseAmount"
+                  className="form-control"
+                />
+              </div>
+              <div>
+                <label htmlFor="expenseDate" className="form-label">
+                  Expense Date
+                </label>
+                <input
+                  type="date"
+                  name="expenseDate"
+                  id="expenseDate"
+                  className="form-control"
+                  style={{}}
+                />
+              </div>
+              <div className="d-grid mt-3">
+                <button
+                  className="b btn btn-dark btn-sm fw-semibold"
+                  type="submit"
+                >
+                  Add
+                </button>
+              </div>
+            </form>
+          </CardBody>
+        </Card>
         <Card className="mt-3">
           <CardHeader title="Expense Items">
             <i class="bi bi-card-list"></i>
