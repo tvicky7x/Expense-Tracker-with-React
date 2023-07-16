@@ -8,11 +8,21 @@ import CardBody from "./Component/CardBody";
 import ListContainer from "./Component/ListContainer";
 import ListItem from "./Component/ListItem";
 import ExpenseObject from "./Component/ExpenseObject";
+import { useState } from "react";
 
 function App() {
+  const [List, setList] = useState(ExpenseObject);
+  function deleteList(item) {
+    let newList = List.filter((obj) => {
+      return obj.id !== item.id;
+    });
+    setList(newList);
+  }
   return (
     <div>
-      <Header title="Expense Tracker"><i className="bi bi-clipboard2-data"></i></Header>
+      <Header title="Expense Tracker">
+        <i className="bi bi-clipboard2-data"></i>
+      </Header>
       <BodyContainer>
         <Card className="mt-3">
           <CardHeader title="Expense Items">
@@ -20,12 +30,18 @@ function App() {
           </CardHeader>
           <CardBody className="p-0">
             <ListContainer className="rounded-top-0">
-              {ExpenseObject.map((items) => {
+              {List.map((items) => {
                 return (
-                  <ListItem
-                    data={items}
-                    className="text-capitalize d-flex justify-content-between"
-                  ></ListItem>
+                  <ListItem data={items}>
+                    <button
+                      className="btn btn-sm btn-danger fw-semibold align-self-center ms-2"
+                      onClick={() => {
+                        deleteList(items);
+                      }}
+                    >
+                      X
+                    </button>
+                  </ListItem>
                 );
               })}
             </ListContainer>

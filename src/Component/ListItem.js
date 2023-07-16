@@ -1,12 +1,8 @@
 import DateTab from "./DateTab";
 
 function ListItem(props) {
-  const classes = "list-group-item " + props.className;
-  function clickHandler() {
-    console.log("Delete!!!");
-  }
   return (
-    <li className={classes}>
+    <li className="list-group-item text-capitalize d-flex justify-content-between">
       <DateTab date={props.data.expenseDate}></DateTab>
       <h5 className="d-inline-block align-self-center me-auto ms-3">
         {props.data.expenseName}
@@ -14,12 +10,7 @@ function ListItem(props) {
       <button className="btn btn-sm btn-dark fw-semibold align-self-center button">
         ₹ {props.data.expenseAmount}
       </button>
-      <button
-        className="btn align-self-center btn-sm btn-danger fw-semibold ms-2"
-        onClick={clickHandler}
-      >
-        X
-      </button>
+      {props.children}
     </li>
   );
 }
