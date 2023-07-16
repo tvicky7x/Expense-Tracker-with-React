@@ -10,9 +10,9 @@ const ExpenseObject = [
     expenseDate: new Date(2020, 11, 5),
   },
   {
-    expenseName: "cloths",
-    expenseAmount: 1150,
-    expenseDate: new Date(2021, 6, 28),
+    expenseName: "chocolate cake",
+    expenseAmount: 350,
+    expenseDate: new Date(2020, 11, 31),
   },
   {
     expenseName: "watch",

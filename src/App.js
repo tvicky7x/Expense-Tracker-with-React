@@ -12,6 +12,7 @@ import { useState } from "react";
 import ExpenseForm from "./Component/Form Components/ExpenseForm";
 import TotalExpense from "./Component/Report Components/TotalExpense";
 import FilterExpense from "./Component/Report Components/FilterExpense";
+import FilteredList from "./Component/List Components/FilteredList";
 
 function App() {
   const [List, setList] = useState(ExpenseObject);
@@ -70,23 +71,7 @@ function App() {
             <i className="bi bi-card-list"></i>
           </CardHeader>
           <CardBody className="p-0">
-            <ListContainer className="rounded-top-0">
-              {List.map((items) => {
-                items.id = Math.floor(Math.random() * 1000000).toString(36);
-                return (
-                  <ListItem data={items} key={items.id}>
-                    <button
-                      className="btn btn-sm btn-danger fw-semibold align-self-center ms-2"
-                      onClick={() => {
-                        deleteList(items);
-                      }}
-                    >
-                      X
-                    </button>
-                  </ListItem>
-                );
-              })}
-            </ListContainer>
+            <FilteredList list={List} onDelete={deleteList}></FilteredList>
           </CardBody>
         </Card>
       </BodyContainer>
