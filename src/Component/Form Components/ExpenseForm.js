@@ -10,10 +10,7 @@ function ExpenseForm(props) {
       expenseDate: new Date(date),
     };
     props.add(expenseObject);
-  }
-  function clearValue() {
-    let form = document.querySelector("form");
-    form.reset();
+    e.target.reset();
   }
   return (
     <form action="#" onSubmit={newExpense}>
@@ -33,13 +30,17 @@ function ExpenseForm(props) {
         <label htmlFor="expenseAmount" className="form-label">
           Expense Amount
         </label>
-        <input
-          type="number"
-          name="expenseAmount"
-          id="expenseAmount"
-          className="form-control"
-          required
-        />
+        <div className="input-group mb-3">
+          <span className="input-group-text">₹</span>
+          <input
+            type="number"
+            name="expenseAmount"
+            id="expenseAmount"
+            className="form-control"
+            min={1}
+            required
+          />
+        </div>
       </div>
       <div>
         <label htmlFor="expenseDate" className="form-label">
@@ -53,22 +54,10 @@ function ExpenseForm(props) {
           required
         />
       </div>
-      <div className="container-fluid mt-3">
-        <div className="row column-gap-2">
-          <div className="col p-0 d-grid">
-            <button className="btn btn-dark btn-sm fw-semibold" type="submit">
-              Add
-            </button>
-          </div>
-          <div className="col-2 p-0 d-grid">
-            <button
-              className="btn btn-danger btn-sm fw-semibold"
-              onClick={clearValue}
-            >
-              Clear
-            </button>
-          </div>
-        </div>
+      <div className="d-grid mt-3">
+        <button className="btn btn-dark btn-sm fw-semibold" type="submit">
+          Add
+        </button>
       </div>
     </form>
   );

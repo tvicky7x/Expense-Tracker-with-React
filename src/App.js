@@ -1,29 +1,43 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import BodyContainer from "./Component/BodyContainer";
+import BodyContainer from "./Component/Container Components/BodyContainer";
 import Header from "./Component/Header";
-import Card from "./Component/Card";
-import CardHeader from "./Component/CardHeader";
-import CardBody from "./Component/CardBody";
-import ListContainer from "./Component/ListContainer";
-import ListItem from "./Component/ListItem";
+import Card from "./Component/Container Components/Card";
+import CardHeader from "./Component/Container Components/CardHeader";
+import CardBody from "./Component/Container Components/CardBody";
+import ListContainer from "./Component/List Components/ListContainer";
+import ListItem from "./Component/List Components/ListItem";
 import ExpenseObject from "./Component/ExpenseObject";
 import { useState } from "react";
-import ExpenseForm from "./Component/ExpenseForm";
+import ExpenseForm from "./Component/Form Components/ExpenseForm";
+import TotalExpense from "./Component/Report Components/TotalExpense";
+import FilterExpense from "./Component/Report Components/FilterExpense";
 
 function App() {
   const [List, setList] = useState(ExpenseObject);
-  let sum = List.reduce((sum, item) => sum + item.expenseAmount, 0);
-  console.log(sum);
   function deleteList(item) {
     let newList = List.filter((obj) => {
-      return obj.expenseName !== item.expenseName;
+      return obj.id !== item.id;
     });
     setList(newList);
   }
   function addExpense(newObj) {
+    newObj.id = Math.floor(Math.random() * 1000000).toString(36);
     let newList = [...List, newObj];
     setList(newList);
+  }
+  function filterYear(e) {
+    if (e.target.value === "allYears") {
+      e.target.classList.remove("bg-dark-subtle");
+      let newList = [...ExpenseObject];
+      setList(newList);
+    } else {
+      e.target.classList.add("bg-dark-subtle");
+      let newList = ExpenseObject.filter((item) => {
+        return item.expenseDate.getFullYear().toString() === e.target.value;
+      });
+      setList(newList);
+    }
   }
 
   return (
@@ -41,12 +55,22 @@ function App() {
           </CardBody>
         </Card>
         <Card className="mt-3">
+          <CardHeader title="Expenses Report">
+            <i class="bi bi-calendar4-week"></i>
+          </CardHeader>
+          <CardBody>
+            <FilterExpense setYear={filterYear}></FilterExpense>
+            <TotalExpense data={List}></TotalExpense>
+          </CardBody>
+        </Card>
+        <Card className="mt-3">
           <CardHeader title="Expenses List">
             <i class="bi bi-card-list"></i>
           </CardHeader>
           <CardBody className="p-0">
             <ListContainer className="rounded-top-0">
               {List.map((items) => {
+                items.id = Math.floor(Math.random() * 1000000).toString(36);
                 return (
                   <ListItem data={items}>
                     <button
