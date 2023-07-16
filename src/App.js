@@ -5,8 +5,6 @@ import Header from "./Component/Header";
 import Card from "./Component/Container Components/Card";
 import CardHeader from "./Component/Container Components/CardHeader";
 import CardBody from "./Component/Container Components/CardBody";
-import ListContainer from "./Component/List Components/ListContainer";
-import ListItem from "./Component/List Components/ListItem";
 import ExpenseObject from "./Component/ExpenseObject";
 import { useState } from "react";
 import ExpenseForm from "./Component/Form Components/ExpenseForm";
