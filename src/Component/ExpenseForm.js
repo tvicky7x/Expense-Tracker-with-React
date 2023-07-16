@@ -11,6 +11,10 @@ function ExpenseForm(props) {
     };
     props.add(expenseObject);
   }
+  function clearValue() {
+    let form = document.querySelector("form");
+    form.reset();
+  }
   return (
     <form action="#" onSubmit={newExpense}>
       <div>
@@ -49,10 +53,22 @@ function ExpenseForm(props) {
           required
         />
       </div>
-      <div className="d-grid mt-3">
-        <button className="b btn btn-dark btn-sm fw-semibold" type="submit">
-          Add
-        </button>
+      <div className="container-fluid mt-3">
+        <div className="row column-gap-2">
+          <div className="col p-0 d-grid">
+            <button className="btn btn-dark btn-sm fw-semibold" type="submit">
+              Add
+            </button>
+          </div>
+          <div className="col-2 p-0 d-grid">
+            <button
+              className="btn btn-danger btn-sm fw-semibold"
+              onClick={clearValue}
+            >
+              Clear
+            </button>
+          </div>
+        </div>
       </div>
     </form>
   );

@@ -13,6 +13,8 @@ import ExpenseForm from "./Component/ExpenseForm";
 
 function App() {
   const [List, setList] = useState(ExpenseObject);
+  let sum = List.reduce((sum, item) => sum + item.expenseAmount, 0);
+  console.log(sum);
   function deleteList(item) {
     let newList = List.filter((obj) => {
       return obj.expenseName !== item.expenseName;
