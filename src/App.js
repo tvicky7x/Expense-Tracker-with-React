@@ -13,8 +13,16 @@ import FilterExpense from "./Component/Report Components/FilterExpense";
 import FilteredList from "./Component/List Components/FilteredList";
 
 function App() {
-  const [List, setList] = useState(ExpenseObject);
   const [Editing, setEdit] = useState(false);
+  const [selectedYear, setYear] = useState("2019");
+  let YearList = ExpenseObject.filter((item) => {
+    return item.expenseDate.getFullYear().toString() === selectedYear;
+  });
+  const [List, setList] = useState(YearList);
+  function updatedYear(stringYear) {
+    setYear(stringYear);
+  }
+
   function deleteList(item) {
     setList(
       List.filter((obj) => {
