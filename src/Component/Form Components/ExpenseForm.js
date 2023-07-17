@@ -9,8 +9,12 @@ function ExpenseForm(props) {
       expenseAmount: Number(amount),
       expenseDate: new Date(date),
     };
+    props.submit();
     props.add(expenseObject);
     e.target.reset();
+  }
+  function closeHandler() {
+    props.submit();
   }
   return (
     <form action="#" onSubmit={newExpense}>
@@ -54,10 +58,19 @@ function ExpenseForm(props) {
           required
         />
       </div>
-      <div className="d-grid mt-3">
-        <button className="btn btn-dark btn-sm fw-semibold" type="submit">
-          Add
-        </button>
+      <div className="container-fluid mt-3">
+        <div className="row gap-2">
+          <button className="col btn btn-dark btn-sm fw-semibold" type="submit">
+            Add
+          </button>
+          <button
+            className="col-2 btn btn-danger btn-sm fw-semibold"
+            onClick={closeHandler}
+            type="button"
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     </form>
   );

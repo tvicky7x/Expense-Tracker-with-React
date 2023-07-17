@@ -14,12 +14,19 @@ import FilteredList from "./Component/List Components/FilteredList";
 
 function App() {
   const [List, setList] = useState(ExpenseObject);
+  const [Editing, setEdit] = useState(false);
   function deleteList(item) {
     setList(
       List.filter((obj) => {
         return obj.id !== item.id;
       })
     );
+  }
+  function startEditing() {
+    setEdit(true);
+  }
+  function afterEditing() {
+    setEdit(false);
   }
   function addExpense(newObj) {
     newObj.id = Math.floor(Math.random() * 1000000).toString(36);
@@ -47,14 +54,24 @@ function App() {
         <i className="bi bi-clipboard2-data"></i>
       </Header>
       <BodyContainer>
-        <Card className="mt-3">
-          <CardHeader title="Add Expense">
-            <i className="bi bi-pencil-square"></i>
-          </CardHeader>
-          <CardBody className="text-start">
-            <ExpenseForm add={addExpense}></ExpenseForm>
-          </CardBody>
-        </Card>
+        {!Editing && (
+          <div className="mt-3 p-2 bg-dark-subtle rounded-2">
+            <button className="btn btn-dark btn-sm" onClick={startEditing}>
+              <h3>Add Expense</h3>
+            </button>
+          </div>
+        )}
+        {Editing && (
+          <Card className="mt-3">
+            <CardHeader title="Add Expense">
+              <i className="bi bi-pencil-square"></i>
+            </CardHeader>
+            <CardBody className="text-start">
+              <ExpenseForm add={addExpense} submit={afterEditing}></ExpenseForm>
+            </CardBody>
+          </Card>
+        )}
+
         <Card className="mt-3">
           <CardHeader title="Expenses Report">
             <i className="bi bi-calendar4-week"></i>
