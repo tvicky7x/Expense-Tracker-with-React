@@ -14,14 +14,7 @@ import FilteredList from "./Component/List Components/FilteredList";
 
 function App() {
   const [Editing, setEdit] = useState(false);
-  const [selectedYear, setYear] = useState("2019");
-  let YearList = ExpenseObject.filter((item) => {
-    return item.expenseDate.getFullYear().toString() === selectedYear;
-  });
-  const [List, setList] = useState(YearList);
-  function updatedYear(stringYear) {
-    setYear(stringYear);
-  }
+  const [List, setList] = useState(ExpenseObject);
 
   function deleteList(item) {
     setList(
@@ -65,7 +58,7 @@ function App() {
         {!Editing && (
           <div className="mt-3 p-2 bg-dark-subtle rounded-2">
             <button className="btn btn-dark btn-sm" onClick={startEditing}>
-              <h3>Add Expense</h3>
+              <h4>Add Expense</h4>
             </button>
           </div>
         )}
