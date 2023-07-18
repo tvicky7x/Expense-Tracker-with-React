@@ -25,7 +25,11 @@ function ExpenseForm(props) {
     }
     localStorage.setItem("expenseObject", JSON.stringify(oldExpanse));
     props.onAdd(expenseObject);
+    props.onSubmit();
     e.target.reset();
+  }
+  function cancelSubmit() {
+    props.onSubmit();
   }
   return (
     <form action="#" onSubmit={newExpense}>
@@ -77,6 +81,7 @@ function ExpenseForm(props) {
           <button
             className="col-2 btn btn-danger btn-sm fw-semibold"
             type="button"
+            onClick={cancelSubmit}
           >
             Cancel
           </button>

@@ -11,6 +11,13 @@ import { useState } from "react";
 
 function App() {
   const [addedData, setAdd] = useState("");
+  const [Editing, setEdit] = useState(false);
+  function afterSubmit() {
+    setEdit(false);
+  }
+  function startAdding() {
+    setEdit(true);
+  }
   function addList(data) {
     if (addedData === "") {
       let newList = [data];
@@ -25,6 +32,9 @@ function App() {
   }
   function deleteNewlyList(item) {
     if (addedData !== "") {
+      let expenseStore = JSON.parse(localStorage.getItem("expenseObject"));
+      let deletedList = expenseStore.filter((Obj) => Obj.id !== item.id);
+      localStorage.setItem("expenseObject", JSON.stringify(deletedList));
       let newList = addedData.filter((Obj) => Obj.id !== item.id);
       setAdd(newList);
     }
@@ -35,14 +45,26 @@ function App() {
         <i className="bi bi-wallet2"></i>
       </Header>
       <BodyContainer>
-        <Card className="mt-3">
-          <CardHeader title="Expense Details">
-            <i className="bi bi-pencil-square"></i>
-          </CardHeader>
-          <CardBody className="text-start">
-            <ExpenseForm onAdd={addList}></ExpenseForm>
-          </CardBody>
-        </Card>
+        {!Editing && (
+          <div className="mt-3 p-2 rounded-1 bg-dark-subtle">
+            <button
+              className="btn btn-sm btn-dark fw-medium"
+              onClick={startAdding}
+            >
+              Add Expense
+            </button>
+          </div>
+        )}
+        {Editing && (
+          <Card className="mt-3">
+            <CardHeader title="Expense Details">
+              <i className="bi bi-pencil-square"></i>
+            </CardHeader>
+            <CardBody className="text-start">
+              <ExpenseForm onAdd={addList} onSubmit={afterSubmit}></ExpenseForm>
+            </CardBody>
+          </Card>
+        )}
         <Card className="mt-3">
           <CardHeader title="Expense Report">
             <i className="bi bi-clipboard2-data"></i>

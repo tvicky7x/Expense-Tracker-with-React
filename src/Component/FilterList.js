@@ -22,7 +22,6 @@ function FilterList(props) {
         return sum + item.expenseAmount;
       }, 0);
   }
-  console.log(total);
   function yearSelectorList(updatedList, year) {
     setYear(year);
     setList(updatedList);
