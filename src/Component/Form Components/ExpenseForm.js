@@ -5,16 +5,27 @@ function ExpenseForm(props) {
     let amount = document.getElementById("expenseAmount").value;
     let date = document.getElementById("expenseDate").value;
     let expenseObject = {
+      id: Math.floor(Math.random() * 1000000).toString(36),
       expenseName: name,
       expenseAmount: Number(amount),
       expenseDate: new Date(date),
     };
-    props.submit();
-    props.add(expenseObject);
+    let oldExpanse = JSON.parse(localStorage.getItem("expenseObject"));
+    if (oldExpanse === null) {
+      oldExpanse = [
+        {
+          id: Math.floor(Math.random() * 1000000).toString(36),
+          expenseName: name,
+          expenseAmount: Number(amount),
+          expenseDate: new Date(date),
+        },
+      ];
+    } else {
+      oldExpanse.push(expenseObject);
+    }
+    localStorage.setItem("expenseObject", JSON.stringify(oldExpanse));
+    props.onAdd(expenseObject);
     e.target.reset();
-  }
-  function closeHandler() {
-    props.submit();
   }
   return (
     <form action="#" onSubmit={newExpense}>
@@ -65,7 +76,6 @@ function ExpenseForm(props) {
           </button>
           <button
             className="col-2 btn btn-danger btn-sm fw-semibold"
-            onClick={closeHandler}
             type="button"
           >
             Cancel
