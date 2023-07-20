@@ -46,9 +46,9 @@ function App() {
       </Header>
       <BodyContainer>
         {!Editing && (
-          <div className="mt-3 p-2 rounded-1 bg-dark-subtle">
+          <div className="mt-3 p-3 rounded-1 bg-dark-subtle">
             <button
-              className="btn btn-sm btn-dark fw-medium"
+              className="btn btn-lg btn-dark fw-medium"
               onClick={startAdding}
             >
               Add Expense

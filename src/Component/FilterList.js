@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import YearUpdate from "./List Components/YearUpdate";
+import YearUpdate from "./Small Components/YearUpdate";
 import ListItem from "./List Components/ListItem";
-import TotalExpense from "./TotalExpense";
+import TotalExpense from "./Small Components/TotalExpense";
+import Chart from "./Chart Components/Chart";
 
 function FilterList(props) {
   const [yearSelected, setYear] = useState("2023");
@@ -47,9 +48,17 @@ function FilterList(props) {
         onYear={yearSelectorList}
         onDelete={props.onDelete}
       ></YearUpdate>
+      <Chart expenseList={List} addedList={props.onAdd} total={total}></Chart>
       <TotalExpense sum={total}></TotalExpense>
       <div className="mt-3">
         <ul className="list-group">
+          {total === 0 && (
+            <li className="list-group-item bg-danger-subtle">
+              <h5 className="pt-2">
+                No Expenses Available <i className="bi bi-info-circle"></i>
+              </h5>
+            </li>
+          )}
           {List.map((listData) => {
             return (
               <ListItem data={listData} key={listData.id}>

@@ -70,6 +70,7 @@ function ExpenseForm(props) {
           name="expenseDate"
           id="expenseDate"
           className="form-control"
+          min={"2019 - 01 - 01"}
           required
         />
       </div>
