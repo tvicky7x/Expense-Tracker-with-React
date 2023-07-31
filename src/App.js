@@ -10,35 +10,18 @@ import FilterList from "./Component/FilterList";
 import { useState } from "react";
 
 function App() {
-  const [addedData, setAdd] = useState("");
+  const [addedData, setAdd] = useState([]);
   const [Editing, setEdit] = useState(false);
-  function afterSubmit() {
-    setEdit(false);
-  }
+
   function startAdding() {
     setEdit(true);
   }
   function addList(data) {
-    if (addedData === "") {
-      let newList = [data];
-      setAdd(newList);
-    } else {
-      let newList = [...addedData, data];
-      setAdd(newList);
-    }
+    let newData = [...addedData, data];
+    setAdd(newData);
+    setEdit(false);
   }
-  function deleteExtraList() {
-    setAdd("");
-  }
-  function deleteNewlyList(item) {
-    if (addedData !== "") {
-      let expenseStore = JSON.parse(localStorage.getItem("expenseObject"));
-      let deletedList = expenseStore.filter((Obj) => Obj.id !== item.id);
-      localStorage.setItem("expenseObject", JSON.stringify(deletedList));
-      let newList = addedData.filter((Obj) => Obj.id !== item.id);
-      setAdd(newList);
-    }
-  }
+
   return (
     <div>
       <Header title="Expense Tracker">
@@ -61,7 +44,7 @@ function App() {
               <i className="bi bi-pencil-square"></i>
             </CardHeader>
             <CardBody className="text-start">
-              <ExpenseForm onAdd={addList} onSubmit={afterSubmit}></ExpenseForm>
+              <ExpenseForm onAdd={addList}></ExpenseForm>
             </CardBody>
           </Card>
         )}
@@ -70,11 +53,7 @@ function App() {
             <i className="bi bi-clipboard2-data"></i>
           </CardHeader>
           <CardBody>
-            <FilterList
-              onAdd={addedData}
-              onDelete={deleteExtraList}
-              onNewDelete={deleteNewlyList}
-            ></FilterList>
+            <FilterList data={addedData}></FilterList>
           </CardBody>
         </Card>
       </BodyContainer>

@@ -2,7 +2,6 @@ import React from "react";
 import CharBar from "./CharBar";
 
 function Chart(props) {
-  console.log(props.total);
   const DataObject = [
     { label: "Jan", value: 0 },
     { label: "Feb", value: 0 },
@@ -19,24 +18,12 @@ function Chart(props) {
   ];
 
   props.expenseList.map((item) => {
-    DataObject[new Date(item.expenseDate).getMonth()].value =
-      DataObject[new Date(item.expenseDate).getMonth()].value +
-      item.expenseAmount;
-  });
-
-  if (props.addedList !== "") {
-    console.log(DataObject);
-    props.addedList.map((item) => {
+    if (props.total !== 0) {
       DataObject[new Date(item.expenseDate).getMonth()].value =
-        DataObject[new Date(item.expenseDate).getMonth()].value +
-        item.expenseAmount;
-    });
-  }
-  DataObject.map((item) => {
-    if (props.total === 0) {
-      item.value = 0;
-    } else {
-      item.value = (item.value / props.total) * 100;
+        ((DataObject[new Date(item.expenseDate).getMonth()].value +
+          item.expenseAmount) /
+          props.total) *
+        100;
     }
   });
 

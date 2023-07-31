@@ -10,22 +10,7 @@ function ExpenseForm(props) {
       expenseAmount: Number(amount),
       expenseDate: new Date(date),
     };
-    let oldExpanse = JSON.parse(localStorage.getItem("expenseObject"));
-    if (oldExpanse === null) {
-      oldExpanse = [
-        {
-          id: Math.floor(Math.random() * 1000000).toString(36),
-          expenseName: name,
-          expenseAmount: Number(amount),
-          expenseDate: new Date(date),
-        },
-      ];
-    } else {
-      oldExpanse.push(expenseObject);
-    }
-    localStorage.setItem("expenseObject", JSON.stringify(oldExpanse));
     props.onAdd(expenseObject);
-    props.onSubmit();
     e.target.reset();
   }
   function cancelSubmit() {

@@ -2,15 +2,7 @@ import React from "react";
 
 function YearUpdate(props) {
   function yearFilter(e) {
-    let expenseData = JSON.parse(localStorage.getItem("expenseObject"));
-    if (expenseData === null) expenseData = [];
-    let newList = expenseData.filter((item) => {
-      return (
-        new Date(item.expenseDate).getFullYear().toString() === e.target.value
-      );
-    });
-    props.onDelete();
-    props.onYear(newList, e.target.value);
+    props.onYear(e.target.value);
   }
 
   return (
